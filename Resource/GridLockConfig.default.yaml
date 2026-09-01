@@ -1,0 +1,214 @@
+#===============================================================================
+# File name   : GridLockConfig.yaml
+# Author      : Alexander Krysl (axkrysl47)
+# Date        : 2026-08-30
+# Version     : 1.0.0
+# Description : Configuration file for the GridLock Window Organization Utility.
+#
+#               This file tells GridLock what hotkeys you wish to enable and
+#               what window actions should occur when you press them.
+#
+#               Please view the GridLock Documentation for more information on
+#               how to customize your GridLock Configuration to your needs.
+#
+# Copyright (c) 2026
+#===============================================================================
+version: 1.0.0
+
+#-------------------------------------------------------------------------------
+# The minimum window size allowed during a Decrease action, in pixels
+# This is done to prevent inadvertently collapsing a window.
+minimum:
+  width:  100
+  height: 100
+
+#-------------------------------------------------------------------------------
+# Sets the type of window borders that GridLock operates on.
+# Choose between `invisible`, `visible`, or `full`
+borders: invisible
+
+#-------------------------------------------------------------------------------
+# List of hotkeys
+#-------------------------------------------------------------------------------
+hotkeys:
+  - key: 'H'
+    modifiers: [ Ctrl, Win, Alt, Shift ]
+    action: Help
+
+  - key: 'Backspace'
+    modifiers: [ Alt, Shift ]
+    action: Revert
+
+  - key: 'D'
+    modifiers: [ Alt, Shift ]
+    action: Minimize
+
+  - key: 'F'
+    modifiers: [ Alt, Shift ]
+    action: Maximize
+
+  - key: "'"
+    modifiers: [ Win, Alt, Shift ]
+    action: MoveCenter
+
+  - key: 'C'
+    modifiers: [ Alt, Shift ]
+    action: Tile
+    parameters:
+      inlay:
+        type: DisplayWidth
+        ratio: 975 / 1000
+      grid: [ 1, 1, 1 ]
+      size: [ 1, 1 ]
+      transpose: false
+      jump: false
+
+  - key: 'V'
+    modifiers: [ Alt, Shift ]
+    action: MediumFill
+
+  - key: 'M'
+    modifiers: [ Alt, Shift ]
+    sequence:
+      - action: Tile
+        parameters:
+          inlay:
+            type: DisplayWidth
+            ratio: 975 / 1000
+          grid: [ 2, 1, 1 ]
+          size: [ 1, 1 ]
+          transpose: false
+          jump: false
+
+      - action: Tile
+        parameters:
+          inlay:
+            type: DisplayWidth
+            ratio: 975 / 1000
+          columns: 3
+          rows: 1
+          index: 1
+          width: 2
+          height: 1
+          transpose: false
+          jump: false
+
+      - action: RightSidebar
+      - action: RightSidebarWide
+
+  - key: 'J'
+    modifiers: [ Alt, Shift ]
+    sequence: [ LeftOrTopThird, MiddleTallOrMiddleWideThird, RightOrBottomThird ]
+
+  - key: '='
+    modifiers: [ Alt, Shift ]
+    action: Increase
+
+  - key: '-'
+    modifiers: [ Alt, Shift ]
+    action: Decrease
+    parameters:
+      type: Scalar
+      scalar: [ 60, 60 ]
+      edgelock: true
+
+  - key: ','
+    modifiers: [ Alt, Shift ]
+    action: LeftHalf
+
+  - key: '.'
+    modifiers: [ Alt, Shift ]
+    action: RightHalf
+
+  - key: ';'
+    modifiers: [ Alt, Shift ]
+    action: TopHalf
+
+  - key: '/'
+    modifiers: [ Alt, Shift ]
+    action: BottomHalf
+
+  - key: 'I'
+    modifiers: [ Alt, Shift ]
+    action: TopLeftCorner
+
+  - key: 'O'
+    modifiers: [ Alt, Shift ]
+    action: TopRightCorner
+
+  - key: 'K'
+    modifiers: [ Alt, Shift ]
+    action: BottomLeftCorner
+
+  - key: 'L'
+    modifiers: [ Alt, Shift ]
+    action: BottomRightCorner
+
+  - key: 'U'
+    modifiers: [ Alt, Shift ]
+    sequence:
+      - action: TopLeftSixth
+      - action: TopMiddleSixth
+      - action: TopRightSixth
+      - action: Tile
+        parameters:
+          grid: [ 3, 2, 4 ]
+          size: [ 1, 1 ]
+      - action: Tile
+        parameters:
+          grid: [ 3, 2 ]
+          index: 5
+          size: [ 1, 1 ]
+      - action: Tile
+        parameters:
+          columns: 3
+          rows: 2
+          index: 6
+          width: 1
+          height: 1
+
+  - key: ','
+    modifiers: [ Win, Alt, Shift ]
+    action: MoveLeft
+
+  - key: '.'
+    modifiers: [ Win, Alt, Shift ]
+    action: MoveRight
+
+  - key: ';'
+    modifiers: [ Win, Alt, Shift ]
+    action: MoveUp
+
+  - key: '/'
+    modifiers: [ Win, Alt, Shift ]
+    action: MoveDown
+
+  - key: 'T'
+    modifiers: [ Win, Alt, Shift ]
+    action: MoveTopLeft
+
+  - key: 'Y'
+    modifiers: [ Win, Alt, Shift ]
+    action: MoveTopRight
+
+  - key: 'G'
+    modifiers: [ Win, Alt, Shift ]
+    action: MoveBottomLeft
+
+  - key: 'H'
+    modifiers: [ Win, Alt, Shift ]
+    action: MoveBottomRight
+
+  - key: ']'
+    modifiers: [ Alt, Shift ]
+    action: JumpNext
+
+  - key: '['
+    modifiers: [ Alt, Shift ]
+    action: Jump
+    parameters:
+      direction: Prev
+
+  - key: 'P'
+    modifiers: [ Win, Alt, Shift ]
+    sequence: [ ProjectPrimary, ProjectExtend ]

@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<!--=========================================================================-->
+<!--File name   : GridLockDocumentation.html                                 -->
+<!--Author      : Alexander Krysl (axkrysl47)                                -->
+<!--Date        : 2026-08-30                                                 -->
+<!--Version     : 1.0.0                                                      -->
+<!--Description : Documentation file for the GridLock Window Organization    -->
+<!--              Utility.                                                   -->
+<!--                                                                         -->
+<!--Copyright (c) 2026                                                       -->
+<!--=========================================================================-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!------------------------------------------------------------------------->
+    <title>GridLock Documentation</title>
+
+
+    <!--=====================================================================-->
+    <!--                                Style                                -->
+    <!--=====================================================================-->
+    <style>
+        /*--------------------------------------------------------------------*/
+        :root {
+            --bg-color: #000000;
+            --sidebar-bg: #141414;
+            --text-color: #ffffff;
+            --text-muted: #c8c8c8;
+            --accent-color: #11b5ee;
+            --border-color: #2a2a2a;
+            --code-bg: #1a1a1a;
+            --card-bg: #141414;
+            --sidebar-width: 250px;
+            --focus-ring: 2px solid var(--accent-color);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: auto;
+            scrollbar-color: #3a3a3a #000000;
+        }
+
+        html::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        html::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        html::-webkit-scrollbar-thumb {
+            background: #000000;
+            border-radius: 4px;
+            border: 3px solid #1a1a1a; /* Creates clean breathing room */
+        }
+
+        html::-webkit-scrollbar-thumb:hover {
+            background: #252525;
+        }
+
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+        }
+
+        /*--------------------------------------------------------------------*/
+        nav {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            padding: 1.5rem;
+            scrollbar-width: thin;
+            scrollbar-color: #3a3a3a var(--sidebar-bg);
+        }
+
+        nav::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        nav::-webkit-scrollbar-track {
+            background: var(--sidebar-bg);
+        }
+
+        nav::-webkit-scrollbar-thumb {
+            background: #3a3a3a;
+            border-radius: 4px;
+        }
+
+        nav::-webkit-scrollbar-thumb:hover {
+            background: #505050;
+        }
+
+        nav h3 {
+            color: var(--text-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 0.4rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.15s ease;
+        }
+
+        nav a:hover,
+        nav a:focus-visible {
+            color: var(--accent-color);
+        }
+
+        nav a:focus-visible {
+            outline: var(--focus-ring);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        .section-title {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            list-style: none;
+        }
+
+        /*--------------------------------------------------------------------*/
+        .section-title > a {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .sub-nav {
+            list-style: none;
+            padding-left: 0.75rem;
+            border-left: 2px solid var(--border-color);
+            margin-top: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .sub-nav li {
+            margin-bottom: 0.3rem;
+        }
+
+        .sub-nav a {
+            font-weight: normal !important;
+            font-family: "Segoe UI", -apple-system, sans-serif;
+        }
+
+        /*--------------------------------------------------------------------*/
+        main {
+            margin-left: var(--sidebar-width);
+            padding: 3rem;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        h1, h2, h3, h4,
+        [id] {
+            scroll-margin-top: 1.5rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.4rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: #5dccf4;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: monospace;
+        }
+
+        .preset-subsection-title {
+            font-size: 1.2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent-color);
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        main ul, main ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        main li {
+            margin-bottom: 0.25rem;
+            color: var(--text-muted);
+        }
+
+        main li strong {
+            color: #ffffff;
+        }
+
+        /*--------------------------------------------------------------------*/
+        .presets-list-detailed {
+            list-style: none !important;
+            margin-left: 0 !important;
+            margin-top: 1rem;
+        }
+
+        .presets-list-detailed li {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            list-style: none;
+        }
+
+        .preset-header {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #5dccf4;
+            font-family: monospace;
+            margin-bottom: 0.25rem;
+        }
+
+        .preset-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted) !important;
+            margin-bottom: 0;
+        }
+
+        /*--------------------------------------------------------------------*/
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            background-color: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #e5e5e5;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.75rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        pre code {
+            padding: 0;
+            background-color: transparent;
+            color: #e5e5e5;
+        }
+
+        .nested-list {
+            list-style-type: circle;
+            margin-top: 0.5rem;
+            margin-left: 1.5rem;
+        }
+
+        /*--------------------------------------------------------------------*/
+        summary::-webkit-details-marker {
+            display: none;
+        }
+        summary {
+            list-style: none;
+        }
+
+        .root-toggle-icon {
+            display: inline-block;
+            font-size: 0.65rem;
+            margin-right: 0.35rem;
+            color: var(--accent-color);
+            transform: rotate(-90deg);
+            transition: transform 0.15s ease;
+        }
+
+        details[open] .root-toggle-icon {
+            transform: rotate(0deg);
+        }
+
+        .section-title-summary {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-color);
+            list-style: none;
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+            transition: color 0.15s ease;
+        }
+
+        .section-title-summary:hover {
+            color: var(--accent-color);
+        }
+
+        .section-title-summary:focus-visible {
+            outline: var(--focus-ring);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        .section-title-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .sidebar-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.75rem;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-color);
+            line-height: 1;
+            letter-spacing: -0.01rem;
+        }
+
+        /*--------------------------------------------------------------------*/
+        .sub-nav > li:not(.section-title) > a,
+        .sub-nav .sub-nav a {
+            font-weight: 400;
+        }
+
+        /*--------------------------------------------------------------------*/
+        @media (max-width: 850px) {
+            body {
+                flex-direction: column;
+            }
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            main {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+            pre {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!--=====================================================================-->
+    <!--                              Sidebar                                -->
+    <!--=====================================================================-->
+    <nav aria-label="Documentation navigation">
+        <div class="sidebar-logo-container">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAF6ElEQVR42n2V229cVxXGf2vvc2bGMx6HJrFDDAlJcC51CklVZBKoaCJUCUErQSFWURBv8BaVtA+VuGg0EhVFCPHAX4AAUTk8AAqoFUKxFVFCXNQLiePIDSFUqu9ufBnPnMtei4cZp05CWdLW1jl7r732/r5vrSXlz3/vmjh/CAOE982M4998il0PDzL+0nmmLo4Tl0qYaXtjyAjb91q+97iRNv6Y91S+Budy6nUDbNNJOHH+ECFXLMwQwrRYmMmT1nRP39b5nYcPIM6zd+hIBjptmk+joT0sTIdtezI0OFz0ZGG1sYd6XanZ5qsCEIEZyFyDykOUk+a2vrJfm5jJH3n6Kw+a6riJdz07+t5M0uxzye5ex2zHs+HUd20ZFe+HCGlOlkR8gEUgAhhxZY3z302WRMCMbf0/Wg+WtZFzLnDpZ00u3eP9mddCB2PBxfZ/gtCOU2gVODWSPziIn5ggNJMsKhRADYKq49SIZ7BXGAVOABPzhuHuUCjOUTMHOGqb4tXF2kHyzPjD82uAXYMA0P/D5vrccg4GQQicGw53HMc683fGw4ZIXN5apy4K6P0vMcN6tsXx9y8fla6eZuyDz4IPf33r9sC+3d2YKkmmlcILk4fwIqRAAQhmertREScQRVjXA4OFFyaL4BzEik8FKefp87umpHz2L2a9u8AsbCCXB2NLT4HHjvV68cL8YmJ/uzyvzt0nHIfIxs+AbYJJxHCRWEj/FNnOfW3du8hvaAAFYk8wEDWCeKHU7ZHOLTZyKmuBhfZHXPKI64i1LR5MkSh+MpKrF7H+gcy6t76OiIqIkKu5UrErWOWTIpFAtmqtxlVzIogYZoKYketDiOtGc0PDWyBNkPaamZOVhaP850oUyTvXkFsT843RFz8L5J23MHRhdiA3Jl1U9KVy9q/0BweP34uVP3v5VSlWjpM01OfpV5OfP3pjM9/loW/fwkm/IyqAi4Rv/KSImVjtQoSZjL96s9Bqpi5PE1T8/scuNT56asQ8I+Yxc+3XdPgQwQpRETOh48/jzxUtioW4iGuTZTA708ZydBREmBm/brcXV0VNA+VKWZPszLlhCV/onoo4h3CvBnIzBBjt8DVLh5dNyQQf7gB1oj3HTt59e4Zg4pO11aDF0rOfHl156uUvHkgYlgByd4ZHIpvd2dERiTgcpmBmpOcTEGPsZA5iPQf6k8V3F5m5NYcrRJK1Eq/e//bo2OqLn7jY3AdgamZqmBrp7WaKiFE/mSNi/PmniWSpkTSR0hM/DqFYzUNUfANBMZNOlejCR0d85Dj4xKNUPrLDWustpHuLpKsrrYBNNZeTPcGkGkIwqRSumHPN3FTUxIKZs7mZI/rGP2Lxp39pWAAX3d1QTCEkWK74Ysyuk0P0HPwYwQi54tUXCHlC0EAwIfgSASE3a9cVAyOAGV4Gv/SIODdASLWt986wYCDOeY8GZen6v219dlFwzpn3FixoyFVyRfKg5FmqeZaqZinkqZIloCo6caVz9a//ej+6HuEiw6lDnfqu4sejcvX3REVPaL1pK6tPp5M3hDSl+/FjVIcetvf+ufiS+eIRslYo9HV9Od679YYlmZdiHMLcXFf2u5GXWVzobVfh35yeuq9yPvdKImoQF7EsNNJfnJ7cWFt7HdYA98zfG1J0kCQkN2eucubAzU1HSPlT38oolWgTUavJXUUPVJdbZU9hQ+v+/X4yCidOwOF5k0veixeIhHhHdyUbGfFcxXOYwK/Gy7awLtJpWtZp/m2r1aBeV3nmvN7RgTi9u5/U2/OzrymdXJYQZwwPB5AABgNnUnptU2f8X6a54F17l6rn2NkutvcI09OwcycsrBiq/o4Yk+Uyx051URz0JCuBkJbBBMw+OEgc55iPsICsLx8ts/62LSVCIYKlecRyy5rvbbdCCRDvpy68EtsDmaULgihEiEAfhvj7Dh8bg1rNheKHVqJmdJSosF/emfDSWO4RH1fFSVXEV0GrIs7r1t24pZv42esVfFQVkao4VxWRbsQJppP/BQr7IPh8C/NAAAAAAElFTkSuQmCC" alt="GridLock Logo" width="25" />
+            <span class="sidebar-logo-text">GridLock</span>
+        </div>
+
+        <!--------------------------------------------------------------------->
+        <!--                               Nav                               -->
+        <!--------------------------------------------------------------------->
+        <ul>
+            <li>
+                <details open>
+                    <summary class="section-title-summary">
+                        <span class="root-toggle-icon" aria-hidden="true">▼</span>
+                        <span>Documentation</span>
+                    </summary>
+
+                    <ul class="sub-nav">
+                        <li class="section-title"><a href="#overview-header">Overview</a></li>
+                        <li class="section-title"><a href="#configuration-header">Configuration</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#key-section">Key</a></li>
+                                <li><a href="#modifiers-section">Modifiers</a></li>
+                                <li><a href="#action-section">Action</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="section-title"><a href="#actions-header">Actions</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#help-section">Help</a></li>
+                                <li><a href="#revert-section">Revert</a></li>
+                                <li><a href="#minimize-section">Minimize</a></li>
+                                <li><a href="#maximize-section">Maximize</a></li>
+                                <li><a href="#tile-section">Tile</a></li>
+                                <li><a href="#move-section">Move</a></li>
+                                <li><a href="#jump-section">Jump</a></li>
+                                <li><a href="#increase-section">Increase</a></li>
+                                <li><a href="#decrease-section">Decrease</a></li>
+                                <li><a href="#project-section">Project</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="section-title"><a href="#sequences-header">Sequences</a></li>
+
+                        <li class="section-title"><a href="#extras-header">Extras</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#minimum-section">Minimum</a></li>
+                                <li><a href="#borders-section">Borders</a></li>
+                                <li><a href="#enable_disable-section">Enable / Disable</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li class="section-title" style="margin-top: 2rem;">
+                <details>
+                    <summary class="section-title-summary">
+                        <span class="root-toggle-icon" aria-hidden="true">▼</span>
+                        <span>Presets</span>
+                    </summary>
+
+                    <ul class="sub-nav" style="margin-top: 0.75rem;">
+                        <li class="section-title"><a href="#definitions-header">Definitions</a></li>
+                        <li class="section-title"><a href="#defaults-header">Defaults</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#preset-minimize">Minimize</a></li>
+                                <li><a href="#preset-maximize">Maximize</a></li>
+                                <li><a href="#preset-tile">Tile</a></li>
+                                <li><a href="#preset-move">Move</a></li>
+                                <li><a href="#preset-jump">Jump</a></li>
+                                <li><a href="#preset-increase">Increase</a></li>
+                                <li><a href="#preset-decrease">Decrease</a></li>
+                                <li><a href="#preset-project">Project</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="section-title"><a href="#fills_sidebars-header">Fills &amp; Sidebars</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#preset-fill">Fill</a></li>
+                                <li><a href="#preset-mediumfill">MediumFill</a></li>
+                                <li><a href="#preset-almostfill">AlmostFill</a></li>
+                                <li><a href="#preset-leftsidebar">LeftSidebar</a></li>
+                                <li><a href="#preset-leftsidebarwide">LeftSidebarWide</a></li>
+                                <li><a href="#preset-rightsidebar">RightSidebar</a></li>
+                                <li><a href="#preset-rightsidebarwide">RightSidebarWide</a></li>
+                                <li><a href="#preset-centerpane">CenterPane</a></li>
+                                <li><a href="#preset-centerpanewide">CenterPaneWide</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="section-title"><a href="#halves-header">Halves</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#preset-lefthalf">LeftHalf</a></li>
+                                <li><a href="#preset-righthalf">RightHalf</a></li>
+                                <li><a href="#preset-tophalf">TopHalf</a></li>
+                                <li><a href="#preset-bottomhalf">BottomHalf</a></li>
+                                <li><a href="#preset-middlehalf">MiddleHalf</a></li>
+                                <li><a href="#preset-leftortophalf">LeftOrTopHalf</a></li>
+                                <li><a href="#preset-rightorbottomhalf">RightOrBottomHalf</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="section-title"><a href="#thirds-header">Thirds</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#preset-leftthird">LeftThird</a></li>
+                                <li><a href="#preset-middlethird">MiddleThird</a></li>
+                                <li><a href="#preset-rightthird">RightThird</a></li>
+                                <li><a href="#preset-lefttwothirds">LeftTwoThirds</a></li>
+                                <li><a href="#preset-righttwothirds">RightTwoThirds</a></li>
+                                <li><a href="#preset-leftortopthird">LeftOrTopThird</a></li>
+                                <li><a href="#preset-middletallormiddlewidethird">MiddleTallOrMiddleWideThird</a></li>
+                                <li><a href="#preset-rightorbottomthird">RightOrBottomThird</a></li>
+                                <li><a href="#preset-leftortoptwothirds">LeftOrTopTwoThirds</a></li>
+                                <li><a href="#preset-rightorbottomtwothirds">RightOrBottomTwoThirds</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="section-title"><a href="#corners_sixths-header">Corners &amp; Sixths</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#preset-topleftcorner">TopLeftCorner</a></li>
+                                <li><a href="#preset-toprightcorner">TopRightCorner</a></li>
+                                <li><a href="#preset-bottomleftcorner">BottomLeftCorner</a></li>
+                                <li><a href="#preset-bottomrightcorner">BottomRightCorner</a></li>
+                                <li><a href="#preset-topleftsixth">TopLeftSixth</a></li>
+                                <li><a href="#preset-topmiddlesixth">TopMiddleSixth</a></li>
+                                <li><a href="#preset-toprightsixth">TopRightSixth</a></li>
+                                <li><a href="#preset-bottomleftsixth">BottomLeftSixth</a></li>
+                                <li><a href="#preset-bottommiddlesixth">BottomMiddleSixth</a></li>
+                                <li><a href="#preset-bottomrightsixth">BottomRightSixth</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="section-title"><a href="#movements-header">Movements</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#preset-center">Center</a></li>
+                                <li><a href="#preset-moveleft">MoveLeft</a></li>
+                                <li><a href="#preset-moveright">MoveRight</a></li>
+                                <li><a href="#preset-moveup">MoveUp</a></li>
+                                <li><a href="#preset-movedown">MoveDown</a></li>
+                                <li><a href="#preset-movetopleft">MoveTopLeft</a></li>
+                                <li><a href="#preset-movetopright">MoveTopRight</a></li>
+                                <li><a href="#preset-movebottomleft">MoveBottomLeft</a></li>
+                                <li><a href="#preset-movebottomright">MoveBottomRight</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="section-title"><a href="#display_jumps-header">Display Jumps</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#preset-jumpnext">JumpNext</a></li>
+                                <li><a href="#preset-jumpprevious">JumpPrevious</a></li>
+                                <li><a href="#preset-jumpleft">JumpLeft</a></li>
+                                <li><a href="#preset-jumpright">JumpRight</a></li>
+                                <li><a href="#preset-jumpup">JumpUp</a></li>
+                                <li><a href="#preset-jumpdown">JumpDown</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="section-title"><a href="#display_projection-header">Display Projection</a></li>
+                        <li>
+                            <ul class="sub-nav">
+                                <li><a href="#preset-projectprimary">ProjectPrimary</a></li>
+                                <li><a href="#preset-projectsecondary">ProjectSecondary</a></li>
+                                <li><a href="#preset-projectextend">ProjectExtend</a></li>
+                                <li><a href="#preset-projectduplicate">ProjectDuplicate</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li>
+                <ul class="section-title">
+                    <li class="section-title"><a href="#about-header">About</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+
+    <!--=====================================================================-->
+    <!--                                Main                                 -->
+    <!--=====================================================================-->
+    <main id="main-content">
+
+
+        <!--------------------------------------------------------------------->
+        <!--                           Overview                              -->
+        <!--------------------------------------------------------------------->
+        <h1 id="overview-header">GridLock Documentation</h1>
+        <p>To quickly get started, use the presets - they can be found in the sidebar.</p>
+        <p>At minimum, each hotkey needs three things: a <strong>Key</strong>, some <strong>Modifiers</strong>, and an <strong>Action</strong>.</p>
+        <p>Example:</p>
+<pre><code>hotkeys:
+  - key: 'H'
+    modifiers: [ Ctrl, Win, Alt, Shift ]
+    action: Help
+
+  - key: 'Backspace'
+    modifiers: [ Alt, Shift ]
+    action: Revert
+
+  - key: 'N'
+    modifiers: [ Alt, Shift ]
+    sequence: [ LeftThird, MiddleThird, RightThird ]
+
+  - key: 'C'
+    modifiers: [ Alt, Shift ]
+    action: Tile
+    parameters:
+      inlay:
+        type: DisplayWidth
+        ratio: 975 / 1000
+      grid: [ 3, 1 ]
+      index: 2
+      size: [ 2, 1 ]
+</code></pre>
+
+
+        <!--------------------------------------------------------------------->
+        <!--                        Configuration                            -->
+        <!--------------------------------------------------------------------->
+        <h2 id="configuration-header">Configuration</h2>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="key-section">Key</h3>
+        <p>Keys are any one key on a keyboard. For generic letters and punctuation, you can simply list it as shown above.</p>
+        <p>So, <code>"A"</code> for the "A" key, <code>","</code> for the comma key, etc.</p>
+        <p>For special keys, you must write the full name, as follows:</p>
+        <ul>
+            <li><code>"Backspace"</code>, <code>"Tab"</code>, <code>"Enter"</code>, <code>"Return"</code>, <code>"Escape"</code>, <code>"Space"</code></li>
+            <li><code>"PageUp"</code>, <code>"PageDown"</code>, <code>"End"</code>, <code>"Home"</code></li>
+            <li><code>"Left"</code>, <code>"Up"</code>, <code>"Right"</code>, <code>"Down"</code></li>
+            <li><code>"Insert"</code>, <code>"Delete"</code></li>
+            <li><code>"F1"</code> through <code>"F24"</code></li>
+        </ul>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="modifiers-section">Modifiers</h3>
+        <p>Modifiers are combinations of the four following keys: <code>Ctrl</code>, <code>Win</code>, <code>Alt</code>, &amp; <code>Shift</code>.</p>
+        <p>You can omit modifier keys, but doing so generally is not recommended.</p>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="action-section">Action</h3>
+        <p>The following is a list of base actions that GridLock supports:</p>
+        <ul>
+            <li><strong>Help</strong> - Display a help message</li>
+            <li><strong>Revert</strong> - Revert all previous GridLock actions on this window</li>
+            <li><strong>Minimize / Maximize</strong> - Minimize or maximize the window</li>
+            <li><strong>Tile</strong> - Tile the window into a grid</li>
+            <li><strong>Move / Jump</strong> - Move the window within the display, or jump into a different display</li>
+            <li><strong>Increase / Decrease</strong> - Change the size of the window</li>
+            <li><strong>Project</strong> - Change the display project setting (Primary only, Secondary only, Duplicate, or Extend)</li>
+        </ul>
+        <p>Each action can also be supplied with a nested tree of parameters. These parameters are specific to each action.</p>
+
+
+        <!--------------------------------------------------------------------->
+        <!--                           Actions                               -->
+        <!--------------------------------------------------------------------->
+        <h2 id="actions-header">Actions</h2>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="help-section">Help</h3>
+        <p>Displays the GridLock Help message.</p>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="revert-section">Revert</h3>
+        <p>Reverts all actions performed on the last active window.</p>
+        <p>If you switch windows and invoke GridLock, the previous window is not saved.</p>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="minimize-section">Minimize</h3>
+        <p>Minimizes the current active window.</p>
+        <p>Optionally toggles minimize status on a given window.</p>
+
+<pre><code>parameters:
+  toggle: boolean</code></pre>
+        <ul>
+            <li><p>Toggle can be <code>true</code> or <code>false</code>.</p>
+                <p>When <code>true</code>, if the last active window is minimized, it is restored; otherwise, the next active window is minimized.</p>
+            </li>
+        </ul>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="maximize-section">Maximize</h3>
+        <p>Maximizes the current active window.</p>
+        <p>Optionally toggles maximize status on a given window.</p>
+
+<pre><code>parameters:
+  toggle: boolean</code></pre>
+        <ul>
+            <li><p>Toggle can be <code>true</code> or <code>false</code>.</p>
+                <p>When <code>true</code>, this hotkey will toggle between maximizing and restoring the window. Otherwise, when false, no action is taken when the active window is already maximized.</p></li>
+        </ul>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="tile-section">Tile</h3>
+        <p>Tile the window into a grid layout.</p>
+        <p>Optionally apply an inlay to the grid layout, allowing your grid to exist in a subsection of the display.</p>
+<pre><code>parameters:
+  inlay:
+    type:      inlaytype
+    scalar:    integer or ratio
+    ratio:     ratio
+    width:     ratio
+    height:    ratio
+  columns:   integer
+  rows:      integer
+  index:     integer
+  grid:      [ integer, integer (, optional index integer) ]
+  width:     integer
+  height:    integer
+  size:      [ integer, integer ]
+  transpose: boolean
+  jump:      boolean</code></pre>
+        <ul>
+            <li>
+                <p><strong>Inlay</strong> describes a subsection of the display the window is currently on.</p>
+                <ul>
+                    <li>
+                        <p><strong>Inputtype</strong> is an enumeration which describes how the inlay is calculated. It can be among the following values:</p>
+                        <ul>
+                            <li><code>None</code> - No inlay applied. The tile action is applied to the display as a whole.</li>
+                            <li><code>Scalar</code> - Inlay is applied as discrete number of pixels.</li>
+                            <li><code>DisplayWidth</code> - Inlay is a ratio of the display's width, applied to both width and height.</li>
+                            <li><code>DisplayHeight</code> - Inlay is a ratio of the display's height, applied to both width and height.</li>
+                            <li><code>Display</code> - Inlay is a ratio of the display's width &amp; height.</li>
+                        </ul>
+                    </li>
+                    <li><p><strong>Scalar</strong> is either a integer or ratio of pixels, when the inlay type is scalar. If an integer is passed in, it is duplicated for both axes.</p></li>
+                    <li><p><strong>Ratio</strong> is a ratio using integers, supplied as integer / integer or integer : integer.</p></li>
+                    <li><p><strong>Width</strong> is a ratio which is applied to the width calculation of inlay.</p></li>
+                    <li><p><strong>Height</strong> is a ratio which is applied to the height calculation of inlay.</p></li>
+                </ul>
+            </li>
+            <li><p><strong>Columns</strong> describe how many columns to tile on the display/inlay.</p></li>
+            <li><p><strong>Rows</strong> describe how many rows to tile on the display/inlay.</p></li>
+            <li><p><strong>Index</strong> describes which cell (one-indexed) the window will occupy in the grid. So, for example, if the tile grid is 3 wide by 2 tall, index 1 means the top-left, index 3 means the top-right, index 4 means the bottom-left, index 6 means the bottom-right.</p></li>
+            <li><p><strong>Grid</strong> is a way to combine Columns, Rows, and (optionally) Index as an singular array. If Index is omitted, it defaults to 1 (top-left). Not intended to be used with column or row parameters.</p></li>
+            <li><p><strong>Width</strong> describes how many tiles wide the window will inhabit - typically just one tile.</p></li>
+            <li><p><strong>Height</strong> describes how many tiles tall the window will inhabit - typically also just one tile.</p></li>
+            <li><p><strong>Size</strong> is a way to combine Width and Height into a single array. Not intended to be used with width or height parameters</p></li>
+            <li><p><strong>Transpose</strong> describes the behavior when the display is taller vertically than horizontally. When <code>true</code>, the columns &amp; rows are swapped, as well as width &amp; height. The inlay is rotated in place.</p></li>
+            <li><p><strong>Jump</strong> describes the behavior upon repeat <strong>Tile</strong> actions when the result is exclusive to one display edge. When the aforementioned condition is true, and the setting is <code>true</code>, the window jumps to the nearby display in the corresponding direction.
+        </ul>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="move-section">Move</h3>
+        <p>Move the active window to a given point in the current display.</p>
+        <p>Optionally allow repeat move hotkeys to jump to the next display in the corresponding direction.</p>
+
+<pre><code>parameters:
+  horizontal: integer or ratio
+  vertical:   integer or ratio
+  jump:       boolean</code></pre>
+        <ul>
+            <li><p><strong>Horizontal</strong> is a ratio of the display width at which to center the active window's horizontal axis. If only an integer is passed, the denominator is 1. If the result would place the window out of the display's bounds, it is shifted back inside the display.</p></li>
+            <li><p><strong>Vertical</strong> is a ratio of the display height at which to center the active window's vertical axis. If only an integer is passed, the denominator is 1. If the result would place the window out of the display's bounds, it is shifted back inside the display.</p></li>
+            <li><p><strong>Jump</strong> describes the behavior upon repeat <strong>Move</strong> actions when the result is exclusive to one display edge. When the aforementioned condition is true, and the setting is <code>true</code>, the window jumps to the nearby display in that corresponding direction.
+        </ul>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="jump-section">Jump</h3>
+        <p>Move (jump) the active window into another display.</p>
+
+<pre><code>parameters:
+  direction: directiontype</code></pre>
+        <ul>
+            <li>
+                <p><strong>Direction</strong> describes how a window is moved between different displays.</p>
+                <ul>
+                    <li><code>Next</code> - Moves the window to the next (right or downmost) display.</li>
+                    <li><code>Previous</code> / <code>Prev</code> - Moves the window to the previous (left or upmost) display.</li>
+                    <li><code>Left</code> - Moves the window to the display to the left.</li>
+                    <li><code>Right</code> - Moves the window to the display to the right.</li>
+                    <li><code>Up</code> - Moves the window to the display above.</li>
+                    <li><code>Down</code> - Moves the window to the display below.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="increase-section">Increase</h3>
+        <p>Increase the size of the active window.</p>
+
+<pre><code>parameters:
+  type:   resizetype
+  scalar: integer or ratio
+  ratio:  ratio
+  width:  ratio
+  height: ratio</code></pre>
+        <ul>
+            <li>
+                <p><strong>Resizetype</strong> is an enumeration which describes how the resize amount is calculated. It can be among the following values:</p>
+                <ul>
+                    <li><code>Scalar</code> - Applied as discrete number of pixels.</li>
+                    <li><code>DisplayWidth</code> - Ratio of the display's width, applied to both width and height.</li>
+                    <li><code>DisplayHeight</code> - Ratio of the display's height, applied to both width and height.</li>
+                    <li><code>Display</code> - Dual-ratio of the display's width &amp; height individually.</li>
+                    <li><code>WindowWidth</code> - Ratio of the window's width, applied to both width and height.</li>
+                    <li><code>WindowHeight</code> - Ratio of the window's height, applied to both width and height.</li>
+                    <li><code>Window</code> - Dual-ratio of the window's width &amp; height individually.</li>
+                </ul>
+            </li>
+            <li><p><strong>Scalar</strong> is either a integer or ratio of pixels, when the resize type is scalar. If an integer is passed in, it is duplicated for both axes.</p></li>
+            <li><p><strong>Ratio</strong> is a ratio using integers, supplied as <code>integer / integer</code> or <code>integer : integer</code>.</p></li>
+            <li><p><strong>Width</strong> is a ratio which is applied to the width calculation of dual-ratio resize.</p></li>
+            <li><p><strong>Height</strong> is a ratio which is applied to the height calculation of dual-ratio resize.</p></li>
+        </ul>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="decrease-section">Decrease</h3>
+        <p>Decrease the size of the active window.</p>
+        <p>Optionally 'edgelock' the active window such that edges of the window which intersect the edges of the display are not affected.</p>
+
+<pre><code>parameters:
+  type:     resizetype
+  scalar:   integer or ratio
+  ratio:    ratio
+  width:    ratio
+  height:   ratio
+  edgelock: boolean
+  restore:  boolean</code></pre>
+        <ul>
+            <li>
+                <p><strong>Resizetype</strong> is an enumeration which describes how the resize amount is calculated. It can be among the following values:</p>
+                <ul>
+                    <li><code>Scalar</code> - Applied as discrete number of pixels.</li>
+                    <li><code>DisplayWidth</code> - Ratio of the display's width, applied to both width and height.</li>
+                    <li><code>DisplayHeight</code> - Ratio of the display's height, applied to both width and height.</li>
+                    <li><code>Display</code> - Dual-ratio of the display's width &amp; height individually.</li>
+                    <li><code>WindowWidth</code> - Ratio of the window's width, applied to both width and height.</li>
+                    <li><code>WindowHeight</code> - Ratio of the window's height, applied to both width and height.</li>
+                    <li><code>Window</code> - Dual-ratio of the window's width &amp; height individually.</li>
+                </ul>
+            </li>
+            <li><p><strong>Scalar</strong> is either a integer or ratio of pixels, when the resize type is scalar. If an integer is passed in, it is duplicated for both axes.</p></li>
+            <li><p><strong>Ratio</strong> is a ratio using integers, supplied as <code>integer / integer</code> or <code>integer : integer</code>.</p></li>
+            <li><p><strong>Width</strong> is a ratio which is applied to the width calculation of dual-ratio resize.</p></li>
+            <li><p><strong>Height</strong> is a ratio which is applied to the height calculation of dual-ratio resize.</p></li>
+            <li><p><strong>Edgelock</strong> describes the behavior when a given edge of the window touches the edge of the display it is on. When <code>true</code>, such edges remain locked to the display edge and are not decreased.</p></li>
+            <li><p><strong>Restore</strong> describes the behavior when decreasing from a maximized window. When <code>true</code>, the prior window's size is restored; otherwise, the window is set to the maximum window size without being maximized.</p></li>
+        </ul>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="project-section">Project</h3>
+        <p>Change the display project mode of the operating system.</p>
+
+<pre><code>parameters:
+  project: projecttype
+  mode:    projecttype</code></pre>
+        <ul>
+            <li>
+                <p><strong>Project / mode</strong> describes your intended display configuration.</p>
+                <ul>
+                    <li><code>Primary</code> / <code>Main</code> - Use only your primary display.</li>
+                    <li><code>Duplicate</code> - Duplicate your primary display across all other displays.</li>
+                    <li><code>Extend</code> - Extend your display space across all other displays.</li>
+                    <li><code>Secondary</code> / <code>External</code> - Use only your secondary or external display.</li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <!--------------------------------------------------------------------->
+        <!--                          Sequences                              -->
+        <!--------------------------------------------------------------------->
+        <h2 id="sequences-header">Sequences</h2>
+        <p>Sequence Hotkeys are also supported by GridLock. Sequences are a series of window actions which are progressed through on repeat presses of the hotkey keybind.</p>
+
+        <p>If only preset window actions are used, you can simply use an array:</p>
+<pre><code>sequence: [ action, action, ... ]</code></pre>
+
+        <p>If instead you want to customize any or each of the window actions inside the sequence, you can:</p>
+<pre><code>sequence:
+  - action: ...
+    parameters:
+      parameter: ...
+  - action: ...</code></pre>
+
+        <p>Regular actions and sequence actions are treated identically, and follow the same parameters as listed here above in the documentation.</p>
+
+
+        <!--------------------------------------------------------------------->
+        <!--                           Extras                                -->
+        <!--------------------------------------------------------------------->
+        <h2 id="extras-header">Extras</h2>
+        <p>GridLock contains some extra configuration settings, as below.</p>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="minimum-section">Minimum</h3>
+        <p>Minimum describes the smallest acceptable window size when performing <strong>Decrease</strong> operations.</p>
+        <p>This to ensure your window cannot collapse into nothing.</p>
+<pre><code>minimum:
+  width:  integer
+  height: integer
+</code></pre>
+        <p>Units are in pixels.</p>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="borders-section">Borders</h3>
+        <p>GridLock contains some border configurations you can use. There are three options:</p>
+        <pre><code>borders: invisible, visible, or full</code></pre>
+        <ul>
+            <li><p><strong>Invisible</strong> — Attempts to maximize screen real estate. This is the default option.</p></li>
+            <li><p><strong>Visible</strong> — Attempts to maximize screen real estate while leaving a visible border sliver.</p></li>
+            <li><p><strong>Full</strong> — Ensures all window edges are fully visible. This uses more screen space and is not recommended.</p></li>
+        </ul>
+
+        <!--------------------------------------------------------------------->
+        <h3 id="enable_disable-section">Enable / Disable</h3>
+        <p>GridLock allows you to enable or disable specific hotkeys or blocks of hotkeys.</p>
+        <p>By default, all hotkeys are enabled.</p>
+        <ul>
+            <li><code>enable: below</code> - Enables this hotkey and all hotkeys below it.</li>
+            <li><code>disable: below</code> - Disables this hotkey and all hotkeys below it.</li>
+            <li><code>enable: this</code> - Enables only this hotkey, overriding any surrounding disable/enable behavior.</li>
+            <li><code>disable: this</code> - Disables only this hotkey, overriding any surrounding disable/enable behavior.</li>
+        </ul>
+        <p>Note that any new <strong>enable</strong> / <strong>disable</strong> entry overrides any previous entry.</p>
+
+
+        <!--------------------------------------------------------------------->
+        <!--                          Presets                                -->
+        <!--------------------------------------------------------------------->
+        <h2 id="definitions-header">Presets</h2>
+        <p>The following are predefined layout configurations supported natively within GridLock.</p>
+        <p>Note that you are allowed to further modify the parameters to the presets per-hotkey.</p>
+
+
+        <!--=================================================================-->
+        <h3 id="defaults-header" class="preset-subsection-title">Defaults</h3>
+        <ul class="presets-list-detailed">
+
+            <!----------------------------------------------------------------->
+            <li id="preset-minimize">
+                <div class="preset-header">Minimize</div>
+<pre><code>action: Minimize
+parameters:
+  toggle: true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-maximize">
+                <div class="preset-header">Maximize</div>
+<pre><code>action: Maximize
+parameters:
+  toggle: true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-tile">
+                <div class="preset-header">Tile</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   unset
+  rows:      unset
+  index:     unset
+  width:     1
+  height:    1
+  transpose: false
+  jump:      true
+</code></pre>
+                <p class="preset-desc">Initializes a blank tile window action. You are expected to write your intended parameters.</p>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-move">
+                <div class="preset-header">Move</div>
+<pre><code>action: Move
+parameters:
+  horizontal: 1 / 2
+  vertical:   1 / 2
+  jump:       true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-jump">
+                <div class="preset-header">Jump</div>
+<pre><code>action: Jump
+parameters:
+  direction: Next
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-increase">
+                <div class="preset-header">Increase</div>
+<pre><code>action: Increase
+parameters:
+  type:   Scalar
+  scalar: [ 60, 60 ]
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-decrease">
+                <div class="preset-header">Decrease</div>
+<pre><code>action: Decrease
+parameters:
+  type:     Scalar
+  scalar:   [ 60, 60 ]
+  edgelock: true
+  restore:  false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-project">
+                <div class="preset-header">Project / ProjectDisplay</div>
+<pre><code>action: Project
+parameters:
+  mode: unset
+</code></pre>
+                <p class="preset-desc">Initializes a blank or placeholder Project action. You are expected to pass your intended mode in the parameters.</p>
+            </li>
+
+        </ul>
+
+
+        <!--=================================================================-->
+        <h3 id="fills_sidebars-header" class="preset-subsection-title">Fills &amp; Sidebars</h3>
+        <ul class="presets-list-detailed">
+
+            <!----------------------------------------------------------------->
+            <li id="preset-fill">
+                <div class="preset-header">Fill</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:    None
+  columns:   1
+  rows:      1
+  index:     1
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+                <p class="preset-desc">Intended to be used to fill an entire inlay.</p>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-mediumfill">
+                <div class="preset-header">MediumFill</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      Display
+    width:     8 / 10
+    height:    95 / 100
+  columns:   1
+  rows:      1
+  index:     1
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-almostfill">
+                <div class="preset-header">AlmostFill</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      DisplayWidth
+    ratio:     975 / 1000
+  columns:   1
+  rows:      1
+  index:     1
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-leftsidebar">
+                <div class="preset-header">LeftSidebar</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      DisplayWidth
+    ratio:     975 / 1000
+  columns:   2
+  rows:      1
+  index:     1
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-leftsidebarwide">
+                <div class="preset-header">LeftSidebarWide</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      DisplayWidth
+    ratio:     975 / 1000
+  columns:   3
+  rows:      1
+  index:     1
+  width:     2
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-rightsidebar">
+                <div class="preset-header">RightSidebar</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      DisplayWidth
+    ratio:     975 / 1000
+  columns:   2
+  rows:      1
+  index:     2
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-rightsidebarwide">
+                <div class="preset-header">RightSidebarWide</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      DisplayWidth
+    ratio:     975 / 1000
+  columns:   3
+  rows:      1
+  index:     2
+  width:     2
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-centerpane">
+                <div class="preset-header">CenterPane</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      DisplayWidth
+    ratio:     975 / 1000
+  columns:   4
+  rows:      1
+  index:     2
+  width:     2
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-centerpanewide">
+                <div class="preset-header">CenterPaneWide</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      DisplayWidth
+    ratio:     975 / 1000
+  columns:   6
+  rows:      1
+  index:     2
+  width:     4
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+        </ul>
+
+
+        <!--=================================================================-->
+        <h3 id="halves-header" class="preset-subsection-title">Halves</h3>
+        <ul class="presets-list-detailed">
+
+            <!----------------------------------------------------------------->
+            <li id="preset-lefthalf">
+                <div class="preset-header">LeftHalf</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   2
+  rows:      1
+  index:     1
+  width:     1
+  height:    1
+  transpose: false
+  jump:      true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-righthalf">
+                <div class="preset-header">RightHalf</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   2
+  rows:      1
+  index:     2
+  width:     1
+  height:    1
+  transpose: false
+  jump:      true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-tophalf">
+                <div class="preset-header">TopHalf</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   1
+  rows:      2
+  index:     1
+  width:     1
+  height:    1
+  transpose: false
+  jump:      true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-bottomhalf">
+                <div class="preset-header">BottomHalf</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   1
+  rows:      2
+  index:     2
+  width:     1
+  height:    1
+  transpose: false
+  jump:      true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-middlehalf">
+                <div class="preset-header">MiddleHalf</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      Display
+    width:     1 / 2
+    height:    1 / 1
+  columns:   1
+  rows:      1
+  index:     1
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-leftortophalf">
+                <div class="preset-header">LeftOrTopHalf</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   2
+  rows:      1
+  index:     1
+  width:     1
+  height:    1
+  transpose: true
+  jump:      false
+</code></pre>
+                <p class="preset-desc">On wide displays, tile to left-half; on tall displays, tile to top-half.</p>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-rightorbottomhalf">
+                <div class="preset-header">RightOrBottomHalf</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   2
+  rows:      1
+  index:     2
+  width:     1
+  height:    1
+  transpose: true
+  jump:      false
+</code></pre>
+                <p class="preset-desc">On wide displays, tile to right-half; on tall displays, tile to bottom-half.</p>
+            </li>
+        </ul>
+
+
+        <!--=================================================================-->
+        <h3 id="thirds-header" class="preset-subsection-title">Thirds</h3>
+        <ul class="presets-list-detailed">
+
+            <!----------------------------------------------------------------->
+            <li id="preset-leftthird">
+                <div class="preset-header">LeftThird</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      1
+  index:     1
+  width:     1
+  height:    1
+  transpose: false
+  jump:      true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-middlethird">
+                <div class="preset-header">MiddleThird</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      1
+  index:     2
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-rightthird">
+                <div class="preset-header">RightThird</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      1
+  index:     3
+  width:     1
+  height:    1
+  transpose: false
+  jump:      true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-lefttwothirds">
+                <div class="preset-header">LeftTwoThirds</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      1
+  index:     1
+  width:     2
+  height:    1
+  transpose: false
+  jump:      true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-righttwothirds">
+                <div class="preset-header">RightTwoThirds</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      1
+  index:     2
+  width:     2
+  height:    1
+  transpose: false
+  jump:      true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-leftortopthird">
+                <div class="preset-header">LeftOrTopThird</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      1
+  index:     1
+  width:     1
+  height:    1
+  transpose: true
+  jump:      false
+</code></pre>
+                <p class="preset-desc">On wide displays, tile to left-third; on tall displays, tile to top-third.</p>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-middletallormiddlewidethird">
+                <div class="preset-header">MiddleTallOrMiddleWideThird</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      1
+  index:     2
+  width:     1
+  height:    1
+  transpose: true
+  jump:      false
+</code></pre>
+                <p class="preset-desc">On wide displays, tile to middle-tall-third; on tall displays, tile to middle-wide-third.</p>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-rightorbottomthird">
+                <div class="preset-header">RightOrBottomThird</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      1
+  index:     3
+  width:     1
+  height:    1
+  transpose: true
+  jump:      false
+</code></pre>
+                <p class="preset-desc">On wide displays, tile to right-third; on tall displays, tile to bottom-third.</p>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-leftortoptwothirds">
+                <div class="preset-header">LeftOrTopTwoThirds</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      1
+  index:     1
+  width:     2
+  height:    1
+  transpose: true
+  jump:      false
+</code></pre>
+                <p class="preset-desc">On wide displays, tile to left-two-thirds; on tall displays, tile to top-two-thirds.</p>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-rightorbottomtwothirds">
+                <div class="preset-header">RightOrBottomTwoThirds</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      1
+  index:     2
+  width:     2
+  height:    1
+  transpose: true
+  jump:      false
+</code></pre>
+                <p class="preset-desc">On wide displays, tile to right-two-thirds; on tall displays, tile to bottom-two-thirds.</p>
+            </li>
+        </ul>
+
+
+        <!--=================================================================-->
+        <h3 id="corners_sixths-header" class="preset-subsection-title">Corners &amp; Sixths</h3>
+        <ul class="presets-list-detailed">
+
+            <!----------------------------------------------------------------->
+            <li id="preset-topleftcorner">
+                <div class="preset-header">TopLeftCorner</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   2
+  rows:      2
+  index:     1
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-toprightcorner">
+                <div class="preset-header">TopRightCorner</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   2
+  rows:      2
+  index:     2
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-bottomleftcorner">
+                <div class="preset-header">BottomLeftCorner</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   2
+  rows:      2
+  index:     3
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-bottomrightcorner">
+                <div class="preset-header">BottomRightCorner</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   2
+  rows:      2
+  index:     4
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-topleftsixth">
+                <div class="preset-header">TopLeftSixth</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      2
+  index:     1
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-topmiddlesixth">
+                <div class="preset-header">TopMiddleSixth</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      2
+  index:     2
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-toprightsixth">
+                <div class="preset-header">TopRightSixth</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      2
+  index:     3
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-bottomleftsixth">
+                <div class="preset-header">BottomLeftSixth</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      2
+  index:     4
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-bottommiddlesixth">
+                <div class="preset-header">BottomMiddleSixth</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      2
+  index:     5
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-bottomrightsixth">
+                <div class="preset-header">BottomRightSixth</div>
+<pre><code>action: Tile
+parameters:
+  inlay:
+    type:      None
+  columns:   3
+  rows:      2
+  index:     6
+  width:     1
+  height:    1
+  transpose: false
+  jump:      false
+</code></pre>
+            </li>
+        </ul>
+
+
+        <!--=================================================================-->
+        <h3 id="movements-header" class="preset-subsection-title">Movements</h3>
+        <ul class="presets-list-detailed">
+
+            <!----------------------------------------------------------------->
+            <li id="preset-center">
+                <div class="preset-header">Center / MoveCenter</div>
+<pre><code>action: Move
+parameters:
+  horizontal: 1 / 2
+  vertical:   1 / 2
+  jump:       false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-moveleft">
+                <div class="preset-header">MoveLeft</div>
+<pre><code>action: Move
+parameters:
+  horizontal: 0 / 1
+  vertical:   1 / 2
+  jump:       true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-moveright">
+                <div class="preset-header">MoveRight</div>
+<pre><code>action: Move
+parameters:
+  horizontal: 1 / 1
+  vertical:   1 / 2
+  jump:       true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-moveup">
+                <div class="preset-header">MoveUp</div>
+<pre><code>action: Move
+parameters:
+  horizontal: 1 / 2
+  vertical:   0 / 1
+  jump:       true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-movedown">
+                <div class="preset-header">MoveDown</div>
+<pre><code>action: Move
+parameters:
+  horizontal: 1 / 2
+  vertical:   1 / 1
+  jump:       true
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-movetopleft">
+                <div class="preset-header">MoveTopLeft</div>
+<pre><code>action: Move
+parameters:
+  horizontal: 0 / 1
+  vertical:   0 / 1
+  jump:       false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-movetopright">
+                <div class="preset-header">MoveTopRight</div>
+<pre><code>action: Move
+parameters:
+  horizontal: 1 / 1
+  vertical:   0 / 1
+  jump:       false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-movebottomleft">
+                <div class="preset-header">MoveBottomLeft</div>
+<pre><code>action: Move
+parameters:
+  horizontal: 0 / 1
+  vertical:   1 / 1
+  jump:       false
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-movebottomright">
+                <div class="preset-header">MoveBottomRight</div>
+<pre><code>action: Move
+parameters:
+  horizontal: 1 / 1
+  vertical:   1 / 1
+  jump:       false
+</code></pre>
+            </li>
+        </ul>
+
+
+        <!--=================================================================-->
+        <h3 id="display_jumps-header" class="preset-subsection-title">Display Jumps</h3>
+        <ul class="presets-list-detailed">
+
+            <!----------------------------------------------------------------->
+            <li id="preset-jumpnext">
+                <div class="preset-header">JumpNext</div>
+<pre><code>action: Jump
+parameters:
+  direction: Next
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-jumpprevious">
+                <div class="preset-header">JumpPrevious</div>
+<pre><code>action: Jump
+parameters:
+  direction: Previous
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-jumpleft">
+                <div class="preset-header">JumpLeft</div>
+<pre><code>action: Jump
+parameters:
+  direction: Left
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-jumpright">
+                <div class="preset-header">JumpRight</div>
+<pre><code>action: Jump
+parameters:
+  direction: Right
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-jumpup">
+                <div class="preset-header">JumpUp</div>
+<pre><code>action: Jump
+parameters:
+  direction: Up
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-jumpdown">
+                <div class="preset-header">JumpDown</div>
+<pre><code>action: Jump
+parameters:
+  direction: Down
+</code></pre>
+            </li>
+        </ul>
+
+
+        <!--=================================================================-->
+        <h3 id="display_projection-header" class="preset-subsection-title">Display Projection</h3>
+        <ul class="presets-list-detailed">
+
+            <!----------------------------------------------------------------->
+            <li id="preset-projectprimary">
+                <div class="preset-header">ProjectPrimary</div>
+<pre><code>action: Project
+parameters:
+  mode: Primary
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-projectsecondary">
+                <div class="preset-header">ProjectSecondary</div>
+<pre><code>action: Project
+parameters:
+  mode: Secondary
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-projectextend">
+                <div class="preset-header">ProjectExtend</div>
+<pre><code>action: Project
+parameters:
+  mode: Extend
+</code></pre>
+            </li>
+
+            <!----------------------------------------------------------------->
+            <li id="preset-projectduplicate">
+                <div class="preset-header">ProjectDuplicate</div>
+<pre><code>action: Project
+parameters:
+  mode: Duplicate
+</code></pre>
+            </li>
+        </ul>
+
+        <!--------------------------------------------------------------------->
+        <!--                            About                                -->
+        <!--------------------------------------------------------------------->
+        <h2 id="about-header">About</h2>
+        <p>GridLock was created by Alexander Krysl (axkrysl47).</p>
+        <p>This software is released under a copyleft license, <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" target="_blank" rel="noopener noreferrer" style="color: #11b5ee; text-decoration: underline;">GNU Affero General Public License</a> (AGPL).</p>
+        <p>The AGPL governs the source code only. The GridLock name, logo, and all branding assets are trademarks of Alexander Krysl and are not licensed under the AGPL. Forks that redistribute modified versions must remove official branding and logos.</p>
+
+    </main>
+</body>
+
+</html>
